@@ -494,7 +494,7 @@ func snakeMe(s string) (snake string) {
 	return snake
 }
 
-func unmarshalEnum(tok json.Token, fd protoreflect.FieldDescriptor, discardUnknown bool) (protoreflect.Value, bool) {
+func unmarshalEnum(tok json.Token, fd pref.FieldDescriptor) (pref.Value, bool) {
 	switch tok.Kind() {
 	case json.String:
 		// Lookup EnumNumber based on name.
@@ -509,6 +509,11 @@ func unmarshalEnum(tok json.Token, fd protoreflect.FieldDescriptor, discardUnkno
 		s = strings.ToUpper(s)
 		if enumVal := fd.Enum().Values().ByName(protoreflect.Name(s)); enumVal != nil {
 			return protoreflect.ValueOfEnum(enumVal.Number()), true
+		}
+		s = snakeMe(string(fd.Enum().Name())) + "_" + s
+		s = strings.ToUpper(s)
+		if enumVal := fd.Enum().Values().ByName(pref.Name(s)); enumVal != nil {
+			return pref.ValueOfEnum(enumVal.Number()), true
 		}
 
 	case json.Number:

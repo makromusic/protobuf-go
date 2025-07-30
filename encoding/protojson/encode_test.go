@@ -1975,6 +1975,13 @@ func TestMarshal(t *testing.T) {
   "sString": ""
 }`,
 	}, {
+		desc:  "proto3 test snowflake",
+		mo:    protojson.MarshalOptions{EmitUnpopulated: false},
+		input: &pb3.Scalars{SInt64: 355398330003034112},
+		want: `{
+  "sInt64": 355398330003034112
+}`,
+	}, {
 		desc:  "EmitUnpopulated: proto2 enum",
 		mo:    protojson.MarshalOptions{EmitUnpopulated: true},
 		input: &pb2.Enums{},

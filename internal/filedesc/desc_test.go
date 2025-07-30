@@ -14,12 +14,11 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	detrand "google.golang.org/protobuf/internal/detrand"
+	"google.golang.org/protobuf/internal/detrand"
 	"google.golang.org/protobuf/internal/filedesc"
 	"google.golang.org/protobuf/proto"
-	pdesc "google.golang.org/protobuf/reflect/protodesc"
-	pref "google.golang.org/protobuf/reflect/protoreflect"
-
+	"google.golang.org/protobuf/reflect/protodesc"
+	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/descriptorpb"
 )
 
@@ -46,44 +45,44 @@ func TestFile(t *testing.T) {
 			Field: []*descriptorpb.FieldDescriptorProto{{
 				Name:         proto.String("field_one"),
 				Number:       proto.Int32(1),
-				Label:        descriptorpb.FieldDescriptorProto_Label(pref.Optional).Enum(),
-				Type:         descriptorpb.FieldDescriptorProto_Type(pref.StringKind).Enum(),
+				Label:        descriptorpb.FieldDescriptorProto_Label(protoreflect.Optional).Enum(),
+				Type:         descriptorpb.FieldDescriptorProto_Type(protoreflect.StringKind).Enum(),
 				DefaultValue: proto.String("hello, \"world!\"\n"),
 				OneofIndex:   proto.Int32(0),
 			}, {
 				Name:         proto.String("field_two"),
 				JsonName:     proto.String("Field2"),
 				Number:       proto.Int32(2),
-				Label:        descriptorpb.FieldDescriptorProto_Label(pref.Optional).Enum(),
-				Type:         descriptorpb.FieldDescriptorProto_Type(pref.EnumKind).Enum(),
+				Label:        descriptorpb.FieldDescriptorProto_Label(protoreflect.Optional).Enum(),
+				Type:         descriptorpb.FieldDescriptorProto_Type(protoreflect.EnumKind).Enum(),
 				DefaultValue: proto.String("BAR"),
 				TypeName:     proto.String(".test.E1"),
 				OneofIndex:   proto.Int32(1),
 			}, {
 				Name:       proto.String("field_three"),
 				Number:     proto.Int32(3),
-				Label:      descriptorpb.FieldDescriptorProto_Label(pref.Optional).Enum(),
-				Type:       descriptorpb.FieldDescriptorProto_Type(pref.MessageKind).Enum(),
+				Label:      descriptorpb.FieldDescriptorProto_Label(protoreflect.Optional).Enum(),
+				Type:       descriptorpb.FieldDescriptorProto_Type(protoreflect.MessageKind).Enum(),
 				TypeName:   proto.String(".test.C"),
 				OneofIndex: proto.Int32(1),
 			}, {
 				Name:     proto.String("field_four"),
 				JsonName: proto.String("Field4"),
 				Number:   proto.Int32(4),
-				Label:    descriptorpb.FieldDescriptorProto_Label(pref.Repeated).Enum(),
-				Type:     descriptorpb.FieldDescriptorProto_Type(pref.MessageKind).Enum(),
+				Label:    descriptorpb.FieldDescriptorProto_Label(protoreflect.Repeated).Enum(),
+				Type:     descriptorpb.FieldDescriptorProto_Type(protoreflect.MessageKind).Enum(),
 				TypeName: proto.String(".test.B.FieldFourEntry"),
 			}, {
 				Name:    proto.String("field_five"),
 				Number:  proto.Int32(5),
-				Label:   descriptorpb.FieldDescriptorProto_Label(pref.Repeated).Enum(),
-				Type:    descriptorpb.FieldDescriptorProto_Type(pref.Int32Kind).Enum(),
+				Label:   descriptorpb.FieldDescriptorProto_Label(protoreflect.Repeated).Enum(),
+				Type:    descriptorpb.FieldDescriptorProto_Type(protoreflect.Int32Kind).Enum(),
 				Options: &descriptorpb.FieldOptions{Packed: proto.Bool(true)},
 			}, {
 				Name:   proto.String("field_six"),
 				Number: proto.Int32(6),
-				Label:  descriptorpb.FieldDescriptorProto_Label(pref.Required).Enum(),
-				Type:   descriptorpb.FieldDescriptorProto_Type(pref.BytesKind).Enum(),
+				Label:  descriptorpb.FieldDescriptorProto_Label(protoreflect.Required).Enum(),
+				Type:   descriptorpb.FieldDescriptorProto_Type(protoreflect.BytesKind).Enum(),
 			}},
 			OneofDecl: []*descriptorpb.OneofDescriptorProto{
 				{
@@ -110,13 +109,13 @@ func TestFile(t *testing.T) {
 				Field: []*descriptorpb.FieldDescriptorProto{{
 					Name:   proto.String("key"),
 					Number: proto.Int32(1),
-					Label:  descriptorpb.FieldDescriptorProto_Label(pref.Optional).Enum(),
-					Type:   descriptorpb.FieldDescriptorProto_Type(pref.StringKind).Enum(),
+					Label:  descriptorpb.FieldDescriptorProto_Label(protoreflect.Optional).Enum(),
+					Type:   descriptorpb.FieldDescriptorProto_Type(protoreflect.StringKind).Enum(),
 				}, {
 					Name:     proto.String("value"),
 					Number:   proto.Int32(2),
-					Label:    descriptorpb.FieldDescriptorProto_Label(pref.Optional).Enum(),
-					Type:     descriptorpb.FieldDescriptorProto_Type(pref.MessageKind).Enum(),
+					Label:    descriptorpb.FieldDescriptorProto_Label(protoreflect.Optional).Enum(),
+					Type:     descriptorpb.FieldDescriptorProto_Type(protoreflect.MessageKind).Enum(),
 					TypeName: proto.String(".test.B"),
 				}},
 				Options: &descriptorpb.MessageOptions{
@@ -130,8 +129,8 @@ func TestFile(t *testing.T) {
 				Field: []*descriptorpb.FieldDescriptorProto{{
 					Name:         proto.String("F"),
 					Number:       proto.Int32(1),
-					Label:        descriptorpb.FieldDescriptorProto_Label(pref.Required).Enum(),
-					Type:         descriptorpb.FieldDescriptorProto_Type(pref.BytesKind).Enum(),
+					Label:        descriptorpb.FieldDescriptorProto_Label(protoreflect.Required).Enum(),
+					Type:         descriptorpb.FieldDescriptorProto_Type(protoreflect.BytesKind).Enum(),
 					DefaultValue: proto.String(`dead\276\357`),
 				}},
 			}},
@@ -145,8 +144,8 @@ func TestFile(t *testing.T) {
 			Extension: []*descriptorpb.FieldDescriptorProto{{
 				Name:     proto.String("X"),
 				Number:   proto.Int32(1000),
-				Label:    descriptorpb.FieldDescriptorProto_Label(pref.Repeated).Enum(),
-				Type:     descriptorpb.FieldDescriptorProto_Type(pref.MessageKind).Enum(),
+				Label:    descriptorpb.FieldDescriptorProto_Label(protoreflect.Repeated).Enum(),
+				Type:     descriptorpb.FieldDescriptorProto_Type(protoreflect.MessageKind).Enum(),
 				TypeName: proto.String(".test.C"),
 				Extendee: proto.String(".test.B"),
 			}},
@@ -171,8 +170,8 @@ func TestFile(t *testing.T) {
 		Extension: []*descriptorpb.FieldDescriptorProto{{
 			Name:     proto.String("X"),
 			Number:   proto.Int32(1000),
-			Label:    descriptorpb.FieldDescriptorProto_Label(pref.Repeated).Enum(),
-			Type:     descriptorpb.FieldDescriptorProto_Type(pref.EnumKind).Enum(),
+			Label:    descriptorpb.FieldDescriptorProto_Label(protoreflect.Repeated).Enum(),
+			Type:     descriptorpb.FieldDescriptorProto_Type(protoreflect.EnumKind).Enum(),
 			Options:  &descriptorpb.FieldOptions{Packed: proto.Bool(true)},
 			TypeName: proto.String(".test.E1"),
 			Extendee: proto.String(".test.B"),
@@ -190,7 +189,7 @@ func TestFile(t *testing.T) {
 			}},
 		}},
 	}
-	fd1, err := pdesc.NewFile(f1, nil)
+	fd1, err := protodesc.NewFile(f1, nil)
 	if err != nil {
 		t.Fatalf("protodesc.NewFile() error: %v", err)
 	}
@@ -203,7 +202,7 @@ func TestFile(t *testing.T) {
 
 	tests := []struct {
 		name string
-		desc pref.FileDescriptor
+		desc protoreflect.FileDescriptor
 	}{
 		{"protodesc.NewFile", fd1},
 		{"filedesc.Builder.Build", fd2},
@@ -220,28 +219,28 @@ func TestFile(t *testing.T) {
 	}
 }
 
-func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
+func testFileAccessors(t *testing.T, fd protoreflect.FileDescriptor) {
 	// Represent the descriptor as a map where each key is an accessor method
 	// and the value is either the wanted tail value or another accessor map.
-	type M = map[string]interface{}
+	type M = map[string]any
 	want := M{
 		"Parent":        nil,
 		"Index":         0,
-		"Syntax":        pref.Proto2,
-		"Name":          pref.Name("test"),
-		"FullName":      pref.FullName("test"),
+		"Syntax":        protoreflect.Proto2,
+		"Name":          protoreflect.Name("test"),
+		"FullName":      protoreflect.FullName("test"),
 		"Path":          "path/to/file.proto",
-		"Package":       pref.FullName("test"),
+		"Package":       protoreflect.FullName("test"),
 		"IsPlaceholder": false,
 		"Options":       &descriptorpb.FileOptions{Deprecated: proto.Bool(true)},
 		"Messages": M{
 			"Len": 3,
 			"Get:0": M{
-				"Parent":        M{"FullName": pref.FullName("test")},
+				"Parent":        M{"FullName": protoreflect.FullName("test")},
 				"Index":         0,
-				"Syntax":        pref.Proto2,
-				"Name":          pref.Name("A"),
-				"FullName":      pref.FullName("test.A"),
+				"Syntax":        protoreflect.Proto2,
+				"Name":          protoreflect.Name("A"),
+				"FullName":      protoreflect.FullName("test.A"),
 				"IsPlaceholder": false,
 				"IsMapEntry":    false,
 				"Options": &descriptorpb.MessageOptions{
@@ -255,27 +254,27 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 				"Extensions":      M{"Len": 0},
 			},
 			"ByName:B": M{
-				"Name":  pref.Name("B"),
+				"Name":  protoreflect.Name("B"),
 				"Index": 1,
 				"Fields": M{
 					"Len":                  6,
 					"ByJSONName:field_one": nil,
 					"ByJSONName:fieldOne": M{
-						"Name":              pref.Name("field_one"),
+						"Name":              protoreflect.Name("field_one"),
 						"Index":             0,
 						"JSONName":          "fieldOne",
 						"Default":           "hello, \"world!\"\n",
-						"ContainingOneof":   M{"Name": pref.Name("O1"), "IsPlaceholder": false},
-						"ContainingMessage": M{"FullName": pref.FullName("test.B")},
+						"ContainingOneof":   M{"Name": protoreflect.Name("O1"), "IsPlaceholder": false},
+						"ContainingMessage": M{"FullName": protoreflect.FullName("test.B")},
 					},
 					"ByJSONName:fieldTwo": nil,
 					"ByJSONName:Field2": M{
-						"Name":            pref.Name("field_two"),
+						"Name":            protoreflect.Name("field_two"),
 						"Index":           1,
 						"HasJSONName":     true,
 						"JSONName":        "Field2",
-						"Default":         pref.EnumNumber(1),
-						"ContainingOneof": M{"Name": pref.Name("O2"), "IsPlaceholder": false},
+						"Default":         protoreflect.EnumNumber(1),
+						"ContainingOneof": M{"Name": protoreflect.Name("O2"), "IsPlaceholder": false},
 					},
 					"ByName:fieldThree": nil,
 					"ByName:field_three": M{
@@ -283,31 +282,31 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 						"IsMap":             false,
 						"MapKey":            nil,
 						"MapValue":          nil,
-						"Message":           M{"FullName": pref.FullName("test.C"), "IsPlaceholder": false},
-						"ContainingOneof":   M{"Name": pref.Name("O2"), "IsPlaceholder": false},
-						"ContainingMessage": M{"FullName": pref.FullName("test.B")},
+						"Message":           M{"FullName": protoreflect.FullName("test.C"), "IsPlaceholder": false},
+						"ContainingOneof":   M{"Name": protoreflect.Name("O2"), "IsPlaceholder": false},
+						"ContainingMessage": M{"FullName": protoreflect.FullName("test.B")},
 					},
 					"ByNumber:12": nil,
 					"ByNumber:4": M{
-						"Cardinality": pref.Repeated,
+						"Cardinality": protoreflect.Repeated,
 						"IsExtension": false,
 						"IsList":      false,
 						"IsMap":       true,
-						"MapKey":      M{"Kind": pref.StringKind},
-						"MapValue":    M{"Kind": pref.MessageKind, "Message": M{"FullName": pref.FullName("test.B")}},
+						"MapKey":      M{"Kind": protoreflect.StringKind},
+						"MapValue":    M{"Kind": protoreflect.MessageKind, "Message": M{"FullName": protoreflect.FullName("test.B")}},
 						"Default":     nil,
-						"Message":     M{"FullName": pref.FullName("test.B.FieldFourEntry"), "IsPlaceholder": false},
+						"Message":     M{"FullName": protoreflect.FullName("test.B.FieldFourEntry"), "IsPlaceholder": false},
 					},
 					"ByNumber:5": M{
-						"Cardinality": pref.Repeated,
-						"Kind":        pref.Int32Kind,
+						"Cardinality": protoreflect.Repeated,
+						"Kind":        protoreflect.Int32Kind,
 						"IsPacked":    true,
 						"IsList":      true,
 						"IsMap":       false,
 						"Default":     nil,
 					},
 					"ByNumber:6": M{
-						"Cardinality":     pref.Required,
+						"Cardinality":     protoreflect.Required,
 						"Default":         []byte(nil),
 						"ContainingOneof": nil,
 					},
@@ -316,7 +315,7 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 					"Len":       2,
 					"ByName:O0": nil,
 					"ByName:O1": M{
-						"FullName": pref.FullName("test.B.O1"),
+						"FullName": protoreflect.FullName("test.B.O1"),
 						"Index":    0,
 						"Options": &descriptorpb.OneofOptions{
 							UninterpretedOption: []*descriptorpb.UninterpretedOption{
@@ -325,28 +324,28 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 						},
 						"Fields": M{
 							"Len":   1,
-							"Get:0": M{"FullName": pref.FullName("test.B.field_one")},
+							"Get:0": M{"FullName": protoreflect.FullName("test.B.field_one")},
 						},
 					},
 					"Get:1": M{
-						"FullName": pref.FullName("test.B.O2"),
+						"FullName": protoreflect.FullName("test.B.O2"),
 						"Index":    1,
 						"Fields": M{
 							"Len":              2,
-							"ByName:field_two": M{"Name": pref.Name("field_two")},
-							"Get:1":            M{"Name": pref.Name("field_three")},
+							"ByName:field_two": M{"Name": protoreflect.Name("field_two")},
+							"Get:1":            M{"Name": protoreflect.Name("field_three")},
 						},
 					},
 				},
 				"ReservedNames": M{
 					"Len":         2,
-					"Get:0":       pref.Name("fizz"),
+					"Get:0":       protoreflect.Name("fizz"),
 					"Has:buzz":    true,
 					"Has:noexist": false,
 				},
 				"ReservedRanges": M{
 					"Len":     2,
-					"Get:0":   [2]pref.FieldNumber{100, 200},
+					"Get:0":   [2]protoreflect.FieldNumber{100, 200},
 					"Has:99":  false,
 					"Has:100": true,
 					"Has:150": true,
@@ -357,13 +356,13 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 				},
 				"RequiredNumbers": M{
 					"Len":   1,
-					"Get:0": pref.FieldNumber(6),
+					"Get:0": protoreflect.FieldNumber(6),
 					"Has:1": false,
 					"Has:6": true,
 				},
 				"ExtensionRanges": M{
 					"Len":      2,
-					"Get:0":    [2]pref.FieldNumber{1000, 2000},
+					"Get:0":    [2]protoreflect.FieldNumber{1000, 2000},
 					"Has:999":  false,
 					"Has:1000": true,
 					"Has:1500": true,
@@ -379,13 +378,13 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 						"Fields": M{
 							"Len": 2,
 							"ByNumber:1": M{
-								"Parent":            M{"FullName": pref.FullName("test.B.FieldFourEntry")},
+								"Parent":            M{"FullName": protoreflect.FullName("test.B.FieldFourEntry")},
 								"Index":             0,
-								"Name":              pref.Name("key"),
-								"FullName":          pref.FullName("test.B.FieldFourEntry.key"),
-								"Number":            pref.FieldNumber(1),
-								"Cardinality":       pref.Optional,
-								"Kind":              pref.StringKind,
+								"Name":              protoreflect.Name("key"),
+								"FullName":          protoreflect.FullName("test.B.FieldFourEntry.key"),
+								"Number":            protoreflect.FieldNumber(1),
+								"Cardinality":       protoreflect.Optional,
+								"Kind":              protoreflect.StringKind,
 								"Options":           (*descriptorpb.FieldOptions)(nil),
 								"HasJSONName":       false,
 								"JSONName":          "key",
@@ -396,18 +395,18 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 								"IsWeak":            false,
 								"Default":           "",
 								"ContainingOneof":   nil,
-								"ContainingMessage": M{"FullName": pref.FullName("test.B.FieldFourEntry")},
+								"ContainingMessage": M{"FullName": protoreflect.FullName("test.B.FieldFourEntry")},
 								"Message":           nil,
 								"Enum":              nil,
 							},
 							"ByNumber:2": M{
-								"Parent":            M{"FullName": pref.FullName("test.B.FieldFourEntry")},
+								"Parent":            M{"FullName": protoreflect.FullName("test.B.FieldFourEntry")},
 								"Index":             1,
-								"Name":              pref.Name("value"),
-								"FullName":          pref.FullName("test.B.FieldFourEntry.value"),
-								"Number":            pref.FieldNumber(2),
-								"Cardinality":       pref.Optional,
-								"Kind":              pref.MessageKind,
+								"Name":              protoreflect.Name("value"),
+								"FullName":          protoreflect.FullName("test.B.FieldFourEntry.value"),
+								"Number":            protoreflect.FieldNumber(2),
+								"Cardinality":       protoreflect.Optional,
+								"Kind":              protoreflect.MessageKind,
 								"JSONName":          "value",
 								"IsPacked":          false,
 								"IsList":            false,
@@ -416,8 +415,8 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 								"IsWeak":            false,
 								"Default":           nil,
 								"ContainingOneof":   nil,
-								"ContainingMessage": M{"FullName": pref.FullName("test.B.FieldFourEntry")},
-								"Message":           M{"FullName": pref.FullName("test.B"), "IsPlaceholder": false},
+								"ContainingMessage": M{"FullName": protoreflect.FullName("test.B.FieldFourEntry")},
+								"Message":           M{"FullName": protoreflect.FullName("test.B"), "IsPlaceholder": false},
 								"Enum":              nil,
 							},
 							"ByNumber:3": nil,
@@ -426,46 +425,46 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 				},
 			},
 			"Get:2": M{
-				"Name":  pref.Name("C"),
+				"Name":  protoreflect.Name("C"),
 				"Index": 2,
 				"Messages": M{
 					"Len":   1,
-					"Get:0": M{"FullName": pref.FullName("test.C.A")},
+					"Get:0": M{"FullName": protoreflect.FullName("test.C.A")},
 				},
 				"Enums": M{
 					"Len":   1,
-					"Get:0": M{"FullName": pref.FullName("test.C.E1")},
+					"Get:0": M{"FullName": protoreflect.FullName("test.C.E1")},
 				},
 				"Extensions": M{
 					"Len":   1,
-					"Get:0": M{"FullName": pref.FullName("test.C.X")},
+					"Get:0": M{"FullName": protoreflect.FullName("test.C.X")},
 				},
 			},
 		},
 		"Enums": M{
 			"Len": 1,
 			"Get:0": M{
-				"Name":    pref.Name("E1"),
+				"Name":    protoreflect.Name("E1"),
 				"Options": &descriptorpb.EnumOptions{Deprecated: proto.Bool(true)},
 				"Values": M{
 					"Len":        2,
 					"ByName:Foo": nil,
 					"ByName:FOO": M{
-						"FullName": pref.FullName("test.FOO"),
+						"FullName": protoreflect.FullName("test.FOO"),
 						"Options":  &descriptorpb.EnumValueOptions{Deprecated: proto.Bool(true)},
 					},
 					"ByNumber:2": nil,
-					"ByNumber:1": M{"FullName": pref.FullName("test.BAR")},
+					"ByNumber:1": M{"FullName": protoreflect.FullName("test.BAR")},
 				},
 				"ReservedNames": M{
 					"Len":         2,
-					"Get:0":       pref.Name("FIZZ"),
+					"Get:0":       protoreflect.Name("FIZZ"),
 					"Has:BUZZ":    true,
 					"Has:NOEXIST": false,
 				},
 				"ReservedRanges": M{
 					"Len":    2,
-					"Get:0":  [2]pref.EnumNumber{10, 19},
+					"Get:0":  [2]protoreflect.EnumNumber{10, 19},
 					"Has:9":  false,
 					"Has:10": true,
 					"Has:15": true,
@@ -479,10 +478,10 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 		"Extensions": M{
 			"Len": 1,
 			"ByName:X": M{
-				"Name":              pref.Name("X"),
-				"Number":            pref.FieldNumber(1000),
-				"Cardinality":       pref.Repeated,
-				"Kind":              pref.EnumKind,
+				"Name":              protoreflect.Name("X"),
+				"Number":            protoreflect.FieldNumber(1000),
+				"Cardinality":       protoreflect.Repeated,
+				"Kind":              protoreflect.EnumKind,
 				"IsExtension":       true,
 				"IsPacked":          true,
 				"IsList":            true,
@@ -490,8 +489,8 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 				"MapKey":            nil,
 				"MapValue":          nil,
 				"ContainingOneof":   nil,
-				"ContainingMessage": M{"FullName": pref.FullName("test.B"), "IsPlaceholder": false},
-				"Enum":              M{"FullName": pref.FullName("test.E1"), "IsPlaceholder": false},
+				"ContainingMessage": M{"FullName": protoreflect.FullName("test.B"), "IsPlaceholder": false},
+				"Enum":              M{"FullName": protoreflect.FullName("test.E1"), "IsPlaceholder": false},
 				"Options":           &descriptorpb.FieldOptions{Packed: proto.Bool(true)},
 			},
 		},
@@ -499,18 +498,18 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 			"Len":      1,
 			"ByName:s": nil,
 			"ByName:S": M{
-				"Parent":   M{"FullName": pref.FullName("test")},
-				"Name":     pref.Name("S"),
-				"FullName": pref.FullName("test.S"),
+				"Parent":   M{"FullName": protoreflect.FullName("test")},
+				"Name":     protoreflect.Name("S"),
+				"FullName": protoreflect.FullName("test.S"),
 				"Options":  &descriptorpb.ServiceOptions{Deprecated: proto.Bool(true)},
 				"Methods": M{
 					"Len": 1,
 					"Get:0": M{
-						"Parent":            M{"FullName": pref.FullName("test.S")},
-						"Name":              pref.Name("M"),
-						"FullName":          pref.FullName("test.S.M"),
-						"Input":             M{"FullName": pref.FullName("test.A"), "IsPlaceholder": false},
-						"Output":            M{"FullName": pref.FullName("test.C.A"), "IsPlaceholder": false},
+						"Parent":            M{"FullName": protoreflect.FullName("test.S")},
+						"Name":              protoreflect.Name("M"),
+						"FullName":          protoreflect.FullName("test.S.M"),
+						"Input":             M{"FullName": protoreflect.FullName("test.A"), "IsPlaceholder": false},
+						"Output":            M{"FullName": protoreflect.FullName("test.C.A"), "IsPlaceholder": false},
 						"IsStreamingClient": true,
 						"IsStreamingServer": true,
 						"Options":           &descriptorpb.MethodOptions{Deprecated: proto.Bool(true)},
@@ -521,7 +520,7 @@ func testFileAccessors(t *testing.T, fd pref.FileDescriptor) {
 	}
 	checkAccessors(t, "", reflect.ValueOf(fd), want)
 }
-func checkAccessors(t *testing.T, p string, rv reflect.Value, want map[string]interface{}) {
+func checkAccessors(t *testing.T, p string, rv reflect.Value, want map[string]any) {
 	p0 := p
 	defer func() {
 		if ex := recover(); ex != nil {
@@ -566,13 +565,13 @@ func checkAccessors(t *testing.T, p string, rv reflect.Value, want map[string]in
 		}
 
 		// Check that the accessor output matches.
-		if want, ok := v.(map[string]interface{}); ok {
+		if want, ok := v.(map[string]any); ok {
 			checkAccessors(t, p, rets[0], want)
 			continue
 		}
 
 		got := rets[0].Interface()
-		if pv, ok := got.(pref.Value); ok {
+		if pv, ok := got.(protoreflect.Value); ok {
 			got = pv.Interface()
 		}
 
@@ -599,7 +598,7 @@ func checkAccessors(t *testing.T, p string, rv reflect.Value, want map[string]in
 	}
 }
 
-func testFileFormat(t *testing.T, fd pref.FileDescriptor) {
+func testFileFormat(t *testing.T, fd protoreflect.FileDescriptor) {
 	const wantFileDescriptor = `FileDescriptor{
 	Syntax:  proto2
 	Path:    "path/to/file.proto"
@@ -718,6 +717,7 @@ func testFileFormat(t *testing.T, fd pref.FileDescriptor) {
 				{Name: FOO}
 				{Name: BAR, Number: 1}
 			]
+			IsClosed: true
 		}]
 		Extensions: [{
 			Name:        X
@@ -739,6 +739,7 @@ func testFileFormat(t *testing.T, fd pref.FileDescriptor) {
 		]
 		ReservedNames:  [FIZZ, BUZZ]
 		ReservedRanges: [10:20, 30]
+		IsClosed:       true
 	}]
 	Extensions: [{
 		Name:        X
@@ -772,6 +773,7 @@ func testFileFormat(t *testing.T, fd pref.FileDescriptor) {
 	]
 	ReservedNames:  [FIZZ, BUZZ]
 	ReservedRanges: [10:20, 30]
+	IsClosed:       true
 }}`
 
 	const wantExtensions = `Extensions{{
@@ -808,7 +810,7 @@ func testFileFormat(t *testing.T, fd pref.FileDescriptor) {
 		path string
 		fmt  string
 		want string
-		val  interface{}
+		val  any
 	}{
 		{"fd", "%v", compactMultiFormat(wantFileDescriptor), fd},
 		{"fd", "%+v", wantFileDescriptor, fd},
@@ -847,4 +849,104 @@ func compactMultiFormat(s string) string {
 		b = append(b, s...)
 	}
 	return string(b)
+}
+
+func TestMapsAreNotDelimited(t *testing.T) {
+	fileDescriptor := &descriptorpb.FileDescriptorProto{
+		Name:    proto.String("test.proto"),
+		Syntax:  proto.String("editions"),
+		Edition: descriptorpb.Edition_EDITION_2023.Enum(),
+		Options: &descriptorpb.FileOptions{
+			Features: &descriptorpb.FeatureSet{
+				MessageEncoding: descriptorpb.FeatureSet_DELIMITED.Enum(),
+			},
+		},
+		MessageType: []*descriptorpb.DescriptorProto{
+			{
+				Name: proto.String("MessageWithMaps"),
+				Field: []*descriptorpb.FieldDescriptorProto{
+					{
+						Name:     proto.String("map_with_message"),
+						Number:   proto.Int32(1),
+						Label:    descriptorpb.FieldDescriptorProto_LABEL_REPEATED.Enum(),
+						Type:     descriptorpb.FieldDescriptorProto_TYPE_MESSAGE.Enum(),
+						TypeName: proto.String(".MessageWithMaps.MapWithMessageEntry"),
+						JsonName: proto.String("mapWithMessage"),
+					},
+					{
+						Name:     proto.String("message"),
+						Number:   proto.Int32(2),
+						Label:    descriptorpb.FieldDescriptorProto_LABEL_REPEATED.Enum(),
+						Type:     descriptorpb.FieldDescriptorProto_TYPE_MESSAGE.Enum(),
+						TypeName: proto.String(".MessageWithMaps"),
+						JsonName: proto.String("message"),
+					},
+				},
+				NestedType: []*descriptorpb.DescriptorProto{
+					{
+						Name:    proto.String("MapWithMessageEntry"),
+						Options: &descriptorpb.MessageOptions{MapEntry: proto.Bool(true)},
+						Field: []*descriptorpb.FieldDescriptorProto{
+							{
+								Name:   proto.String("key"),
+								Number: proto.Int32(1),
+								Label:  descriptorpb.FieldDescriptorProto_LABEL_OPTIONAL.Enum(),
+								Type:   descriptorpb.FieldDescriptorProto_TYPE_STRING.Enum(),
+							},
+							{
+								Name:     proto.String("value"),
+								Number:   proto.Int32(2),
+								Label:    descriptorpb.FieldDescriptorProto_LABEL_OPTIONAL.Enum(),
+								Type:     descriptorpb.FieldDescriptorProto_TYPE_MESSAGE.Enum(),
+								TypeName: proto.String(".MessageWithMaps"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	fd1, err := protodesc.NewFile(fileDescriptor, nil)
+	if err != nil {
+		t.Fatalf("protodesc.NewFile() error: %v", err)
+	}
+
+	b, err := proto.Marshal(fileDescriptor)
+	if err != nil {
+		t.Fatalf("proto.Marshal() error: %v", err)
+	}
+	fd2 := filedesc.Builder{RawDescriptor: b}.Build().File
+
+	tests := []struct {
+		name string
+		desc protoreflect.FileDescriptor
+	}{
+		{"protodesc.NewFile", fd1},
+		{"filedesc.Builder.Build", fd2},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			mapField := tt.desc.Messages().Get(0).Fields().Get(0)
+			if !mapField.IsMap() {
+				t.Fatalf("field should be a map")
+			}
+			nonMapField := tt.desc.Messages().Get(0).Fields().Get(1)
+			if nonMapField.IsMap() {
+				t.Fatalf("field should not be a map")
+			}
+			// sanity check that delimited default has taken effect
+			if nonMapField.Kind() != protoreflect.GroupKind {
+				t.Fatalf("non-map field should have group kind, instead got %v", nonMapField.Kind())
+			}
+			// now we can confirm that the map fields are NOT groups
+			if mapField.Kind() != protoreflect.MessageKind {
+				t.Fatalf("map field should have message kind, instead got %v", mapField.Kind())
+			}
+			mapValField := mapField.Message().Fields().ByNumber(2)
+			if mapValField.Kind() != protoreflect.MessageKind {
+				t.Fatalf("map value field should have message kind, instead got %v", mapValField.Kind())
+			}
+		})
+	}
 }

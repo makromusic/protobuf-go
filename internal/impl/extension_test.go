@@ -11,7 +11,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/protobuf/proto"
-	pref "google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/reflect/protoreflect"
 
 	testpb "google.golang.org/protobuf/internal/testprotos/test"
 )
@@ -23,8 +23,8 @@ func TestExtensionType(t *testing.T) {
 		}),
 	}
 	for _, test := range []struct {
-		xt    pref.ExtensionType
-		value interface{}
+		xt    protoreflect.ExtensionType
+		value any
 	}{
 		{
 			xt:    testpb.E_OptionalInt32,

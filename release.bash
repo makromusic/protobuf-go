@@ -59,8 +59,8 @@ set -e
 if [[ $(git branch --list release) ]]; then
 	echo "error: release branch already exists"; exit 1
 fi
-git change release
-git sync
+git codereview change release
+git codereview sync
 
 # Create commit for actual release.
 INPLACE='-i ""' # BSD version of sed expects argument after -i
@@ -79,7 +79,7 @@ fi
 git commit -a -m "all: release $(version_string)"
 
 # Build release binaries.
-go test -mod=vendor -timeout=60m -count=1 integration_test.go "$@" -buildRelease
+go test google.golang.org/protobuf -run='^TestIntegration$' -timeout=60m -count=1 "$@" -buildRelease
 
 # Create commit to start development after release.
 VERSION_PRERELEASE="${VERSION_PRERELEASE}.devel" # append ".devel"
